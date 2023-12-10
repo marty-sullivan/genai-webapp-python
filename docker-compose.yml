@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  
+  devcontainer:
+    container_name: genai-devcontainer
+    build:
+      context: ./.devcontainer
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+      - frontend
+    volumes:
+      - '$HOME/.aws:/root/.aws'
+      - '.:/workspace'
+
+  backend:
+    container_name: genai-backend
+    command: ["app.server:app", "--host", "0.0.0.0", "--port", "8100", "--reload"]
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "8100:8100"
+    environment:
+      APPLICATION: 'genai'
+      ENVIRONMENT: 'local'
+      AZURE_OPENAI_API_KEY: '${AZURE_OPENAI_API_KEY}'
+      AZURE_OPENAI_ENDPOINT: '${AZURE_OPENAI_ENDPOINT}'
+    volumes:
+      - '$HOME/.aws:/home/uvicorn/.aws'
+      - './backend:/code'
+  
+  frontend:
+    container_name: genai-frontend
+    command: ["run", "app/Home.py", "--server.port", "8101", "--server.runOnSave", "true"]
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    depends_on:
+      - backend
+    ports:
+      - "8101:8101"
+    environment:
+      APPLICATION: 'genai'
+      ENVIRONMENT: 'local'
+      BACKEND_HOST: 'genai-backend'
+      BACKEND_PORT: '8100'
+    volumes:
+      - '$HOME/.aws:/home/streamlit/.aws'
+      - './frontend:/code'
