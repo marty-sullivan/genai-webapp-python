@@ -1,5 +1,5 @@
 {
-	"name": "langchain-webapp-python",
+	"name": "genai-webapp-python",
 	"dockerComposeFile": "../docker-compose.yml",
 	"service": "devcontainer",
 	"workspaceFolder": "/workspace",

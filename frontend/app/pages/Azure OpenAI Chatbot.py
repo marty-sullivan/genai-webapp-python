@@ -9,8 +9,8 @@ backend_port = environ['BACKEND_PORT']
 gpt35_chain = RemoteRunnable(f'http://{backend_host}:{backend_port}/azure_gpt35')
 gpt4_chain = RemoteRunnable(f'http://{backend_host}:{backend_port}/azure_gpt4')
 
-st.title('Azure OpenAI Chatbot')
-st.caption('A simple chatbot that uses either the latest GPT-3.5 or GPT-4 model')
+st.title('🤖 Azure OpenAI Chatbot')
+st.caption('A simple chatbot that uses either the latest GPT-3.5 or GPT-4 model via Azure OpenAI')
 
 model_selection = st.selectbox('Select LLM', ['gpt-4-turbo', 'gpt-3.5-turbo'])
 

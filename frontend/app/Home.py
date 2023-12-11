@@ -1,7 +1,5 @@
-from langserve.client import RemoteRunnable
 from os import environ
 import streamlit as st
-import requests
 
 backend_host = environ['BACKEND_HOST']
 backend_port = environ['BACKEND_PORT']

@@ -9,7 +9,7 @@ backend_port = environ['BACKEND_PORT']
 claude_chain = RemoteRunnable(f'http://{backend_host}:{backend_port}/bedrock_claude')
 llama_chain = RemoteRunnable(f'http://{backend_host}:{backend_port}/bedrock_llama')
 
-st.title('AWS Bedrock Chatbot')
+st.title('🤖 Amazon Bedrock Chatbot')
 st.caption('A simple chatbot that uses either the latest Anthropic Claude v2 LLM or Llama 2 Chat 70B LLM via Amazon Bedrock')
 
 model_selection = st.selectbox('Select LLM', ['Claude', 'Llama'])
